@@ -87,7 +87,7 @@ function submitMeme(source, url, id, alias){
         <Route
           path="/" element={
             <MemeGenerator
-              errMsg={errMsg}
+              // errMsg={errMsg}
               randomMeme={randomMeme}
               setRandomMeme={setRandomMeme}
               // for submit meme to DB
