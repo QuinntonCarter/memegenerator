@@ -7,7 +7,7 @@ import Navbar from './components/Navbar.js';
 import axios from 'axios';
 
 export default function App() {
-  const [ errMsg, setErrMsg ] = useState('')
+  // const [ errMsg, setErrMsg ] = useState('')
   // all memes from the app's DB
   const [ memes, setMemes ] = useState([]);
   // all api memes
