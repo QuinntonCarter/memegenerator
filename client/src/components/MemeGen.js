@@ -105,7 +105,7 @@ export default function MemeGenerator(props){
         ).reverse()
 
         useEffect(() => {
-            axios.get(`/create`, 
+            axios.get(`https://memegenbackend.herokuapp.com/create`, 
             { params: {
                 template_id: randomMeme.id,
                 text0: inputs.topText,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LoadingComp from '../components/Loading';
 import axios from 'axios';
 
@@ -51,33 +51,33 @@ export default function UserMemes(props){
             setInputs(prevInputs => ({
             ...prevInputs,
             [name]: value,
-        }), editPrev()
+        })
         );
     };
     
     // creates edit preview
-    const editPrev = () => {
-        axios.get(`/create`, 
-        { params: {
-            template_id: _api_id,
-            text0: inputs.topText,
-            text1: inputs.bottomText
-            }
-        })
-        .then((res) => 
-            setImgEditable(prevInputs => ({
-                ...prevInputs, 
-                imgSrc: res.data.data ? res.data.data.url : imgEditable.imgSrc,
-            }))
-        )
-        .catch(err => console.log(err))
-    };
+    // const editPrev = () => {
+    //     axios.get(`https://memegenbackend.herokuapp.com/create`, 
+    //     { params: {
+    //         template_id: _api_id,
+    //         text0: inputs.topText,
+    //         text1: inputs.bottomText
+    //         }
+    //     })
+    //     .then((res) => 
+    //         setImgEditable(prevInputs => ({
+    //             ...prevInputs, 
+    //             imgSrc: res.data.data ? res.data.data.url : imgEditable.imgSrc,
+    //         }))
+    //     )
+    //     .catch(err => console.log(err))
+    // };
 
     // submits the edit
     const handleEdit = (e, id) => {
         const createdDate = JSON.stringify(new Date()).slice(1,11)
         e.preventDefault()
-        axios.get(`/create`, 
+        axios.get(`https://memegenbackend.herokuapp.com/create`, 
         { params: {
             template_id: _api_id,
             text0: inputs.topText,
@@ -106,6 +106,23 @@ export default function UserMemes(props){
             bottomText: ''
         })
     };
+
+    useEffect(() => {
+        axios.get(`https://memegenbackend.herokuapp.com/create`, 
+        { params: {
+            template_id: _api_id,
+            text0: inputs.topText,
+            text1: inputs.bottomText
+            }
+        })
+        .then((res) => 
+            setImgEditable(prevInputs => ({
+                ...prevInputs, 
+                imgSrc: res.data.data ? res.data.data.url : imgEditable.imgSrc,
+            }))
+        )
+        .catch(err => console.log(err))
+    })
 
     return(
         <>

@@ -37,7 +37,7 @@ export default function App() {
 
  // FETCH/GET memes for editing
   function getMemes(){
-    axios.get('/resources')
+    axios.get('https://memegenbackend.herokuapp.com/resources')
     .then((response) => {
       const { memes } = (response.data.data)
       const memesFit = memes.filter(memes => memes.box_count <= 2)
@@ -63,7 +63,7 @@ function submitMeme(source, url, id, alias){
       _api_id: id,
       alias: alias
   }
-  axios.post(`/db`, submittedMeme)
+  axios.post(`https://memegenbackend.herokuapp.com/db`, submittedMeme)
   .then(res => 
     // adds to db and returns response from db, push res obj to array
       setMemes(prevState => ([
@@ -77,6 +77,7 @@ function submitMeme(source, url, id, alias){
 
 // gather initial data
   useEffect(() => {
+    getMemes()
     getCreatedMemes()
   },[])
 
