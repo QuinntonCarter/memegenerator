@@ -26,6 +26,7 @@ mongoose.connect(MONGODB_URI, {
 
 app.get('/', (req, res, next) => {
     res.send('(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ Hello world, I am a server!')
+    next()
 })
 
 app.use('/db', require('./routes/memeRouter.js'));
@@ -35,7 +36,7 @@ app.get('/resources', (req, res, next) => {
         method: 'GET',
         url: GET_URL,
         headers: {
-            'Access-Control-Allow-Origin': 'http://localhost:9000, http://localhost:9000/, http://localhost:9000/resources/', 
+            'Access-Control-Allow-Origin': 'https://whatchumeme.netlify.app/https://memegenbackend.herokuapp.com, https://whatchumeme.netlify.app/https://memegenbackend.herokuapp.com/, https://whatchumeme.netlify.app/https://memegenbackend.herokuapp.com/memes/, https://whatchumeme.netlify.app/https://memegenbackend.herokuapp.com/resources/', 
             'Access-Control-Allow-Headers': 'Origin, X-Request-With, Content-Type, Accept'
         },
     })
@@ -56,7 +57,7 @@ app.get('/create', (req, res, next) => {
             template_id: req.query.template_id
         },
         headers: {
-            'Access-Control-Allow-Origin': 'http://localhost:9000/create/',
+            'Access-Control-Allow-Origin': 'https://whatchumeme.netlify.app/https://memegenbackend.herokuapp.com/create/',
             'Access-Control-Allow-Headers': 'Origin, X-Request-With, Content-Type, Accept'
         }
     })
