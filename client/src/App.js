@@ -9,7 +9,8 @@ import axios from 'axios';
 // ** need to implement error handling and display **
 
 const {
-  REACT_APP_GET_URL
+  REACT_APP_GET_URL,
+  REACT_APP_SERVER_URL
 } = process.env
 
 export default function App() {
@@ -35,7 +36,7 @@ export default function App() {
 
 // GET memes from DB
   function getCreatedMemes(){
-    axios.get(`/db`)
+    axios.get(`${REACT_APP_SERVER_URL}/db`)
     .then(res => {
         setMemes(res.data)
       })
@@ -70,7 +71,7 @@ function submitMeme(source, url, id, alias){
       _api_id: id,
       alias: alias
   }
-  axios.post(`/db`, submittedMeme)
+  axios.post(`${REACT_APP_SERVER_URL}/db`, submittedMeme)
   .then(res => 
     // adds to db and returns response from db, push res obj to array
       setMemes(prevState => ([
