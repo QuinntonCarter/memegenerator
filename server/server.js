@@ -1,15 +1,18 @@
 const express = require('express');
 const app = express();
-require('dotenv').config();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const cors = require('cors');
+require('dotenv').config();
 
 const {
     PORT,
-    MONGODB_URI
+    MONGODB_URI,
+    SERVER_URL
 } = process.env
 
 app.use(express.json());
+app.use(cors({ origin: SERVER_URL }))
 app.use(morgan('dev'));
 
 mongoose.connect(MONGODB_URI, {
