@@ -13,7 +13,7 @@ const {
 } = process.env
 
 app.use(express.json());
-// permits access to db to client url
+// permits access to db to client urls
 app.use(cors({ origin: CLIENT_URL, CLIENT_URL_WEB }));
 app.use(morgan('dev'));
 

@@ -9,10 +9,10 @@ const LoadingComp = (props) => {
     } = props
 
     useEffect(() => {
-        if(!randomMeme || !memes){
+        if(!randomMeme){
         getMemes()
         }
-    },[randomMeme, memes])
+    },[randomMeme])
 
     return(
         <div className="flex items-center h-screen justify-center ">
