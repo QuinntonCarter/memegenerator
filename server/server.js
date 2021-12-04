@@ -8,11 +8,13 @@ require('dotenv').config();
 const {
     PORT,
     MONGODB_URI,
-    SERVER_URL
+    CLIENT_URL,
+    CLIENT_URL_WEB
 } = process.env
 
 app.use(express.json());
-app.use(cors({ origin: SERVER_URL }))
+// permits access to db to client url
+app.use(cors({ origin: CLIENT_URL, CLIENT_URL_WEB }));
 app.use(morgan('dev'));
 
 mongoose.connect(MONGODB_URI, {
