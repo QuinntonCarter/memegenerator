@@ -1,0 +1,194 @@
+@import '/node_modules/tailwindcss/base.css';
+@import '/node_modules/tailwindcss/components.css';
+@import '/node_modules/tailwindcss/utilities.css';
+.keyboardCat {
+  background-image: url('https://media4.giphy.com/media/Hcw7rjsIsHcmk/giphy.gif');
+  /* height: 100px; */
+}
+
+.keyboardCat > h1 {
+  align-self: center;
+  justify-self: center;
+  margin: 0
+}
+/* 
+.app {
+  display: grid;
+  position: fixed;
+  bottom: 0;
+} */
+
+body {
+  display: grid;
+  grid-template-columns: auto;
+}
+
+/* tailwind */
+@layer base {
+  input {
+    @apply bg-gray-200 rounded m-1 p-1
+  } body {
+    @apply bg-blue-200
+  } nav {
+    @apply bg-blue-300
+  }
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* @layer base {
+  h1 {
+    @apply text-5xl;
+  }
+  img {
+    @apply 
+  }
+} */
+
+/* first version of styles */
+/* * {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: whitesmoke;
+  display: grid;
+  margin: 0;
+  grid-template-columns: auto;
+}
+
+main > header {
+  align-content: center;
+  justify-content: center;
+}
+
+header {
+  display: flex;
+  height: 200px;
+  background: #00ffbf; 
+  background: -webkit-linear-gradient(to right, #00ffbf); 
+  background: linear-gradient(to right, #00ffbf); 
+}
+
+header > img {
+  padding: 20px;
+  border-radius: 27px;
+}
+
+header > h1 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: oldlace;
+  font-size: 50px;
+  margin-left: 60px;
+}
+
+.appDisplay {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  margin: 5%;
+}
+
+.appDisplay > img {
+  width: 80%;
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.appDisplay > form {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.meme {
+  display: block;
+  width: 50%;
+  margin: auto;
+}
+
+h2 {
+  color: gray;
+}
+
+.meme > img {
+  width: 100%;
+}
+
+.meme > h2 {
+  position: absolute;
+  width: 80%;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 15px 0;
+  padding: 0 5px;
+  font-family: impact, sans-serif;
+  font-size: 2em;
+  text-transform: uppercase;
+  color: white;
+  letter-spacing: 1px;
+  text-shadow:
+      2px 2px 0 #000,
+      -2px -2px 0 #000,
+      2px -2px 0 #000,
+      -2px 2px 0 #000,
+      0 2px 0 #000,
+      2px 0 0 #000,
+      0 -2px 0 #000,
+      -2px 0 0 #000,
+      2px 2px 5px #000;
+}
+
+.meme > .bottom {
+  bottom: 0;
+}
+
+.meme > .top {
+  top: 0;
+}
+
+.meme-form {
+  width: 90%;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.meme-form > input {
+  height: 7%;
+
+}
+
+.meme-form > button {
+  border-radius: 8px;
+  border: none;
+  font-size: 17px;
+  letter-spacing: 1.5px;
+  color: white;
+  background: #00ccff;
+  margin: 4px;
+  cursor: pointer;
+  height: 8%;
+  padding: 4%;
+}
+
+.meme-form > input::-webkit-input-placeholder { 
+font-size: 17px;
+text-align: center
+}
+.meme-form > input::-moz-placeholder { 
+font-size: 17px;
+text-align: center
+}
+.meme-form > input:-ms-input-placeholder { 
+font-size: 17px;
+text-align: center
+}
+.meme-form > input:-moz-placeholder { 
+font-size: 17px;
+text-align: center
+} */
