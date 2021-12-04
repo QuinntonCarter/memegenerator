@@ -4,7 +4,6 @@ require('dotenv').config();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const axios = require('axios');
-const path = require("path");
 
 const {
     PORT,
@@ -25,7 +24,9 @@ mongoose.connect(MONGODB_URI, {
     useFindAndModify: false
 });
 
-app.use(express.static(path.join(__dirname, "client", "build")));
+app.get('/', (req, res, next) => {
+    res.send('(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ Hello world, I am a server!')
+})
 
 app.use('/db', require('./routes/memeRouter.js'));
 
@@ -70,10 +71,6 @@ app.use((err, req, res, next) => {
     }   
     return res.send({errMsg: err.message})
 })
-
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
 
 app.listen(PORT, () => {
     console.log(`Server is running on local port ${PORT}`)
