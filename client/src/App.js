@@ -6,6 +6,12 @@ import Header from './components/Header.js';
 import Navbar from './components/Navbar.js';
 import axios from 'axios';
 
+// ** need to implement error handling and display **
+
+const {
+  REACT_APP_GET_URL
+} = process.env
+
 export default function App() {
   // const [ errMsg, setErrMsg ] = useState('')
   // all memes from the app's DB
@@ -19,6 +25,7 @@ export default function App() {
     name: '',
     imgSrc: '',
     initialUrl: '',
+    tempID: '',
     id: ''
   });
 
@@ -37,7 +44,7 @@ export default function App() {
 
  // FETCH/GET memes for editing
   function getMemes(){
-    axios.get('https://memegenbackend.herokuapp.com/resources')
+    axios.get(REACT_APP_GET_URL)
     .then((response) => {
       const { memes } = (response.data.data)
       const memesFit = memes.filter(memes => memes.box_count <= 2)
@@ -63,7 +70,7 @@ function submitMeme(source, url, id, alias){
       _api_id: id,
       alias: alias
   }
-  axios.post(`https://memegenbackend.herokuapp.com/db`, submittedMeme)
+  axios.post(`/db`, submittedMeme)
   .then(res => 
     // adds to db and returns response from db, push res obj to array
       setMemes(prevState => ([

@@ -3,6 +3,12 @@ import UserMemes from './UserMemes.js';
 import MemeForm from '../forms/MemeForm.js';
 import axios from 'axios';
 
+const { 
+    REACT_APP_POST_URL,
+    REACT_APP_USERNAME,
+    REACT_APP_PASSWORD
+} = process.env
+
 const initInputs = { topText: '', bottomText: '' }
 
 export default function MemeGenerator(props){
@@ -37,26 +43,16 @@ export default function MemeGenerator(props){
         e.preventDefault()
         const createdDate = JSON.stringify(new Date()).slice(1,11).replace('"', '')
         // sends inputs through as params to endpoint to complete meme creation
-        axios.get(`/create`, 
-        { params: {
-            template_id: randomMeme.id,
-            text0: inputs.topText,
-            text1: inputs.bottomText
-            }
-        })
-        .then(res => 
-            // saves to userMemes array until it is submitted to db
-            // by submitMeme function
             setUserMemes(prevState => ([
                 ...prevState,
                 {
-                    imgSrc: res.data.data.url,
+                    imgSrc: randomMeme.imgSrc,
                     initialUrl: randomMeme.initialUrl,
-                    tempID: res.data.data.page_url.slice(22),
+                    tempID: randomMeme.tempID,
                     _api_id: randomMeme.id,
                     created: createdDate
                 }
-            ])),
+            ]))
             // sets randomMeme key values to match default image's
             setRandomMeme({
                 name: randomMeme.name,
@@ -64,8 +60,6 @@ export default function MemeGenerator(props){
                 initialUrl: randomMeme.initialUrl,
                 id: randomMeme.id
             })
-        )
-        .catch(err => console.log(err))
         // reset inputs to init
         setInputs(initInputs)
     };
@@ -105,19 +99,24 @@ export default function MemeGenerator(props){
         ).reverse()
 
         useEffect(() => {
-            axios.get(`https://memegenbackend.herokuapp.com/create`, 
-            { params: {
-                template_id: randomMeme.id,
-                text0: inputs.topText,
-                text1: inputs.bottomText
-                }
-            })
+            axios(REACT_APP_POST_URL, {
+                method: 'POST',
+                params: {
+                    username: REACT_APP_USERNAME,
+                    password: REACT_APP_PASSWORD,
+                    font: 'arial',
+                    text0: inputs.topText,
+                    text1: inputs.bottomText,
+                    template_id: randomMeme.id
+                }}
+            )
             .then((res) => 
             // sets preview img url to randomMeme imgSrc
                 setRandomMeme(prevInputs => ({
                     ...prevInputs,
                     name: randomMeme.name,
                     imgSrc: res.data.data ? res.data.data.url : randomMeme.imgSrc,
+                    tempID: res.data.data ? res.data.data.page_url.slice(22) : '',
                     initialUrl: randomMeme.initialUrl,
                     id: randomMeme.id
                 }))

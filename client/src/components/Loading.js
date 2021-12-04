@@ -9,7 +9,7 @@ const LoadingComp = (props) => {
     } = props
 
     useEffect(() => {
-        if(!randomMeme){
+        if(!randomMeme || !memes){
         getMemes()
         }
     },[randomMeme, memes])

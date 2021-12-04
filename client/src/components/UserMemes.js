@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import LoadingComp from '../components/Loading';
 import axios from 'axios';
 
-// ** finish error handling and display **
+const { 
+    REACT_APP_POST_URL,
+    REACT_APP_USERNAME,
+    REACT_APP_PASSWORD
+} = process.env
 
 export default function UserMemes(props){
     const { 
@@ -55,52 +59,21 @@ export default function UserMemes(props){
         );
     };
     
-    // creates edit preview
-    // const editPrev = () => {
-    //     axios.get(`https://memegenbackend.herokuapp.com/create`, 
-    //     { params: {
-    //         template_id: _api_id,
-    //         text0: inputs.topText,
-    //         text1: inputs.bottomText
-    //         }
-    //     })
-    //     .then((res) => 
-    //         setImgEditable(prevInputs => ({
-    //             ...prevInputs, 
-    //             imgSrc: res.data.data ? res.data.data.url : imgEditable.imgSrc,
-    //         }))
-    //     )
-    //     .catch(err => console.log(err))
-    // };
-
     // submits the edit
     const handleEdit = (e, id) => {
         const createdDate = JSON.stringify(new Date()).slice(1,11)
         e.preventDefault()
-        axios.get(`https://memegenbackend.herokuapp.com/create`, 
-        { params: {
-            template_id: _api_id,
-            text0: inputs.topText,
-            text1: inputs.bottomText
-            }
-        })
-        .then((res) => {
             deleteMeme(id)
             setUserMemes(prevState => ([
                 ...prevState, {
-                    imgSrc: res.data.data.url,
+                    imgSrc: imgEditable.imgSrc,
                     initialUrl: initialUrl,
-                    tempID: res.data.data.page_url.slice(22),
+                    tempID: imgEditable.tempID,
                     _api_id: _api_id,
                     created: createdDate
                 },
             ]))
-        }
-        )
-        .finally(
-            setToggleEdit(prevState => !prevState))
-            // ** finish error handling and display **
-        .catch(err => console.log(err))
+        setToggleEdit(prevState => !prevState)
         setInputs({
             topText: '',
             bottomText: ''
@@ -108,21 +81,26 @@ export default function UserMemes(props){
     };
 
     useEffect(() => {
-        axios.get(`https://memegenbackend.herokuapp.com/create`, 
-        { params: {
-            template_id: _api_id,
-            text0: inputs.topText,
-            text1: inputs.bottomText
+        axios(REACT_APP_POST_URL, {
+            method: 'POST',
+            params: {
+                username: REACT_APP_USERNAME,
+                password: REACT_APP_PASSWORD,
+                font: 'arial',
+                text0: inputs.topText,
+                text1: inputs.bottomText,
+                template_id: _api_id
             }
         })
         .then((res) => 
             setImgEditable(prevInputs => ({
                 ...prevInputs, 
                 imgSrc: res.data.data ? res.data.data.url : imgEditable.imgSrc,
+                tempID: res.data.data ? res.data.data.page_url.slice(22) : imgEditable.tempID
             }))
         )
         .catch(err => console.log(err))
-    })
+    }, [inputs.topText, inputs.bottomText])
 
     return(
         <>
