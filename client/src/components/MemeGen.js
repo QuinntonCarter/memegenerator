@@ -67,12 +67,7 @@ export default function MemeGenerator(props){
 
     const getRandom = (e) => {
         e.preventDefault()
-        axios.get(REACT_APP_GET_URL)
-        .then((response) => {
-        const { memes } = (response.data.data)
-        const memesFit = memes.filter(memes => memes.box_count <= 2)
-        const randomMeme = memesFit[Math.floor(Math.random()*(73-1)+1)]
-        localStorage.setItem('RandomMeme', JSON.stringify(randomMeme))
+        const randomMeme = allMemes[Math.floor(Math.random()*(73-1)+1)]
         setRandomMeme({
             name: randomMeme.name,
             imgSrc: randomMeme.url,
@@ -80,8 +75,6 @@ export default function MemeGenerator(props){
             id: randomMeme.id,
             boxes: randomMeme.box_count
     })
-    })
-    .catch(err => console.log(err))
     };
 
     const mappedMemes = (memeObj) => 

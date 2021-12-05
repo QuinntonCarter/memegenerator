@@ -11,7 +11,6 @@ export default function MemeForm(props){
         memes,
         getCreatedMemes,
         allMemes,
-        setRandomMeme,
         getRandom,
         getMemes,
         errMsg
@@ -39,7 +38,6 @@ export default function MemeForm(props){
                 </div>
             :
                 <LoadingComp
-                    setRandomMeme={setRandomMeme}
                     getMemes={getMemes}
                     allMemes={allMemes}
                     memes={memes}
