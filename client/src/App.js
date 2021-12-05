@@ -51,7 +51,6 @@ export default function App() {
       const memesFit = memes.filter(memes => memes.box_count <= 2)
       setAllMemes(memesFit)
       const randomMeme = memesFit[Math.floor(Math.random()*(73-1+1)+1)]
-      localStorage.setItem('RandomMeme', randomMeme)
         setRandomMeme({
             name: randomMeme.name,
             imgSrc: randomMeme.url,
