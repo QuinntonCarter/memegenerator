@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { BeakerIcon } from '@heroicons/react/outline';
 import { SwitchHorizontalIcon } from '@heroicons/react/outline';
 import LoadingComp from '../components/Loading';
@@ -7,6 +7,7 @@ import { AppContext } from '../context/appContext';
 export default function MemeForm(props){
     const {
         randomMeme,
+        getMemes
     } = useContext(AppContext)
 
     const {
@@ -16,6 +17,11 @@ export default function MemeForm(props){
         getRandom
     } = props
 
+    useEffect(() => {
+        if(!randomMeme.imgSrc){
+            getMemes()
+        }
+    })
 
     return(
         <>

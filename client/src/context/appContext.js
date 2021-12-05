@@ -17,13 +17,7 @@ export default function AppProvider(props){
     // all memes created by current user
     const [ userMemes, setUserMemes ] = useState([]);
     // initial meme for editing
-    const [ randomMeme, setRandomMeme ] = useState({
-        name: '',
-        imgSrc: '',
-        initialUrl: '',
-        tempID: '',
-        id: ''
-    });
+    const [ randomMeme, setRandomMeme ] = useState({});
 
     // function handleDBError(errMsg){
     //   setErrMsg(errMsg)
