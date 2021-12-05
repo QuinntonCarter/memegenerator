@@ -13,7 +13,7 @@ const {
   REACT_APP_SERVER_URL
 } = process.env
 
-const localRand = JSON.parse(localStorage.getItem('RandomMeme'))
+const localRand = JSON.parse(localStorage.getItem('RandomMeme')) || ''
 
 export default function App() {
   // const [ errMsg, setErrMsg ] = useState('')

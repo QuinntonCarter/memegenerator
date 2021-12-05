@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import Trollface from '../images/Trollface.svg';
 
-const localRand = JSON.parse(localStorage.getItem('RandomMeme'))
+const localRand = JSON.parse(localStorage.getItem('RandomMeme')) || ''
 
 
 const LoadingComp = (props) => {
@@ -18,7 +18,7 @@ const LoadingComp = (props) => {
             setRandomMeme({
                 imgSrc: localRand.url
             })
-        } if (localRand.url === null || undefined){
+        } if(localRand.url === null || undefined){
             getMemes()
             setRandomMeme({
                 imgSrc: localRand.url
