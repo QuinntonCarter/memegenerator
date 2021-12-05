@@ -75,7 +75,6 @@ export default function AppProvider(props){
     // gather initial data
     useEffect(() => {
         getCreatedMemes()
-        getMemes()
     },[])
 
         return(
