@@ -1,8 +1,11 @@
-export default function MemesView(props){
+import { useContext } from 'react';
+import { AppContext } from '../context/appContext';
+
+export default function MemesView(){
     const {
         getCreatedMemes,
         memes
-    } = props
+    } = useContext(AppContext)
 
     
     const mappedMemes = memes ? memes.map(meme => 

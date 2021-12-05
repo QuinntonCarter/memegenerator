@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import LoadingComp from '../components/Loading';
 import axios from 'axios';
+import { AppContext } from '../context/appContext';
 
 const { 
     REACT_APP_POST_URL,
@@ -11,14 +12,17 @@ const {
 export default function UserMemes(props){
     const { 
         imgSrc,
-        userMemes,
         tempID,
         _api_id,
         created,
         initialUrl,
-        submitMeme,
-        setUserMemes,
     } = props
+
+    const {
+        setUserMemes,
+        submitMeme,
+        userMemes
+    } = useContext(AppContext)
 
     const [ toggleEdit, setToggleEdit ] = useState(false)
     const [ toggleSave, setToggleSave ] = useState(false)

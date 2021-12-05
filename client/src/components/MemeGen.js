@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import UserMemes from './UserMemes.js';
 import MemeForm from '../forms/MemeForm.js';
+import { AppContext } from '../context/appContext.js'
 import axios from 'axios';
 
 const {
@@ -11,22 +12,16 @@ const {
 
 const initInputs = { topText: '', bottomText: '' }
 
-export default function MemeGenerator(props){
+export default function MemeGenerator(){
     const {
-        errMsg,
-        memes,
-        getMemes,
         // all memes from DB
-        setMemes,
-        // all memes from api
         allMemes,
         // all current user's memes
         userMemes,
         setUserMemes,
         randomMeme,
-        setRandomMeme,
-        submitMeme
-    } = props
+        setRandomMeme
+    } = useContext(AppContext)
 
     const [ inputs, setInputs ] = useState(initInputs);
 
@@ -81,13 +76,9 @@ export default function MemeGenerator(props){
             <UserMemes
                 key={meme.tempID}
                 {...randomMeme}
-                userMemes={userMemes}
                 inputs={inputs}
                 handleEdit={handleSubmit}
                 handleChange={handleChange}
-                submitMeme={submitMeme}
-                setUserMemes={setUserMemes}
-                setMemes={setMemes}
                 tempID={meme.tempID}
                 _api_id={meme._api_id}
                 imgSrc={meme.imgSrc}
@@ -123,19 +114,14 @@ export default function MemeGenerator(props){
             .catch(err => console.log(err))
         }, [inputs.topText, inputs.bottomText])
 
+
         return(
             <div className='flex flex-col pb-12 pt-16 overflow-scroll bg-blue-200 w-screen p-3'>
                     <MemeForm
-                        errMsg={errMsg}
                         inputs={inputs}
                         handleChange={handleChange}
                         handleSubmit={handleSubmit}
-                        randomMeme={randomMeme}
-                        allMemes={allMemes}
                         getRandom={getRandom}
-                        setRandomMeme={setRandomMeme}
-                        getMemes={getMemes}
-                        memes={memes}
                     />
                     { userMemes ? mappedMemes(userMemes) : null }
                 <p className='pt-14 text-center text-xs font-mono text-blue-300'> Quinnton Carter 2021 </p>
