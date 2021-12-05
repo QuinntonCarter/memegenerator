@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import Trollface from '../images/Trollface.svg';
 
+const localRand = JSON.parse(localStorage.getItem('RandomMeme'))
 const LoadingComp = (props) => {
     const {
+        setRandomMeme,
         randomMeme,
         getMemes
     } = props
@@ -11,8 +13,11 @@ const LoadingComp = (props) => {
     useEffect(() => {
         if(!randomMeme){
             getMemes()
+            setRandomMeme({
+                imgSrc: localRand.url
+            })
         }
-    },)
+    })
 
     return(
         <div className="flex items-center h-screen justify-center ">

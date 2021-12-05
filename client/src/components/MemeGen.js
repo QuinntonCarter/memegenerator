@@ -3,7 +3,8 @@ import UserMemes from './UserMemes.js';
 import MemeForm from '../forms/MemeForm.js';
 import axios from 'axios';
 
-const { 
+const {
+    REACT_APP_GET_URL,
     REACT_APP_POST_URL,
     REACT_APP_USERNAME,
     REACT_APP_PASSWORD
@@ -66,16 +67,21 @@ export default function MemeGenerator(props){
 
     const getRandom = (e) => {
         e.preventDefault()
-        // variable finds random number and finds meme at index of that number
-        const randomMeme = allMemes[Math.floor(Math.random()*(73-1+1)+1)]
-        // sets that meme to randomMeme
+        axios.get(REACT_APP_GET_URL)
+        .then((response) => {
+        const { memes } = (response.data.data)
+        const memesFit = memes.filter(memes => memes.box_count <= 2)
+        const randomMeme = memesFit[Math.floor(Math.random()*(73-1)+1)]
+        localStorage.setItem('RandomMeme', JSON.stringify(randomMeme))
         setRandomMeme({
             name: randomMeme.name,
             imgSrc: randomMeme.url,
             initialUrl: randomMeme.url,
             id: randomMeme.id,
             boxes: randomMeme.box_count
-        })
+    })
+    })
+    .catch(err => console.log(err))
     };
 
     const mappedMemes = (memeObj) => 
