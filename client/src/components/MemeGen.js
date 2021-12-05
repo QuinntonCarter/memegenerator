@@ -4,7 +4,6 @@ import MemeForm from '../forms/MemeForm.js';
 import axios from 'axios';
 
 const {
-    REACT_APP_GET_URL,
     REACT_APP_POST_URL,
     REACT_APP_USERNAME,
     REACT_APP_PASSWORD
