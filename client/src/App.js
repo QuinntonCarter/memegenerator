@@ -13,6 +13,8 @@ const {
   REACT_APP_SERVER_URL
 } = process.env
 
+const localRand = JSON.parse(localStorage.getItem('RandomMeme'))
+
 export default function App() {
   // const [ errMsg, setErrMsg ] = useState('')
   // all memes from the app's DB
@@ -44,8 +46,8 @@ export default function App() {
   };
 
  // FETCH/GET memes for editing
-  function getMemes(){
-    axios.get(REACT_APP_GET_URL)
+  async function getMemes(){
+    await axios.get(REACT_APP_GET_URL)
     .then((response) => {
       const { memes } = (response.data.data)
       const memesFit = memes.filter(memes => memes.box_count <= 2)
@@ -86,8 +88,24 @@ function submitMeme(source, url, id, alias){
 
 // gather initial data
   useEffect(() => {
+    getMemes()
     getCreatedMemes()
   },[])
+
+// get memes from api if fall out
+  useEffect(() => {
+    if(!randomMeme){
+        getMemes()
+        setRandomMeme({
+            imgSrc: localRand.url
+        })
+    } if (localRand.url === null || undefined){
+      getMemes()
+      setRandomMeme({
+          imgSrc: localRand.url
+      })
+  }
+  }, [allMemes])
 
   return (
     <div className='h-screen flex flex-col bg-blue-200'>
