@@ -119,7 +119,8 @@ export default function MemeGenerator(props){
                     tempID: res.data.data ? res.data.data.page_url.slice(22) : '',
                     initialUrl: randomMeme.initialUrl,
                     id: randomMeme.id
-                }))
+                })
+                )
             )
             .catch(err => console.log(err))
         }, [inputs.topText, inputs.bottomText])
@@ -134,6 +135,7 @@ export default function MemeGenerator(props){
                         randomMeme={randomMeme}
                         allMemes={allMemes}
                         getRandom={getRandom}
+                        setRandomMeme={setRandomMeme}
                         getMemes={getMemes}
                         memes={memes}
                     />

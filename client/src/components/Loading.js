@@ -3,16 +3,16 @@ import Trollface from '../images/Trollface.svg';
 
 const LoadingComp = (props) => {
     const {
-        memes,
         randomMeme,
         getMemes
     } = props
 
+    // get memes from api if fall out
     useEffect(() => {
         if(!randomMeme){
-        getMemes()
+            getMemes()
         }
-    },[randomMeme])
+    }, [])
 
     return(
         <div className="flex items-center h-screen justify-center ">
