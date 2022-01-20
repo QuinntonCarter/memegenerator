@@ -11,6 +11,7 @@ export default function MemeForm(props){
     } = useContext(AppContext);
 
     const {
+        handleSubmit,
         handleChange,
         inputs,
         getRandom
@@ -31,7 +32,7 @@ export default function MemeForm(props){
                         <img className='mx-auto rounded border-white border-4 m-3 lg:m-0 lg:flex image' src={randomMeme.imgSrc} alt='initial-meme' />
                         <span className='flex flex-col p-3 m-2'>
                             <span className='flex flex-row lg:space-x-3'>
-                                <button className='flex-grow text-xs px-4 p-1 m-1 mx-auto font-medium rounded-full w-auto bg-cream border-b-4 border-yellow-400 text-indigo-800 inline-flex items-center' >
+                                <button className='flex-grow text-xs px-4 p-1 m-1 mx-auto font-medium rounded-full w-auto bg-cream border-b-4 border-yellow-400 text-indigo-800 inline-flex items-center' onClick={handleSubmit}>
                                     <span> Generate </span>
                                     <BeakerIcon className='w-5'/>
                                 </button>
